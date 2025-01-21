@@ -1,0 +1,25 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    margin-top: 20px;
+}
+
+
+.btn-success {
+    background-color: rgba(68, 9, 219, 0.8);
+    border-color: rgba(68, 9, 219, 0.8);
+    color: white;
+    font-size: 1.25rem;
+    padding: 10px 20px;
+}
+
+.btn-success:hover {
+    background-color: rgba(68, 9, 219, 0.8);
+    border-color: rgba(68, 9, 219, 0.8);
+    color: white;
+}
