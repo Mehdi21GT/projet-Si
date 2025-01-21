@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Gestion Des Recrutements</title>
+    <style>
+        body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #2c3e50;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+/* Header */
+header {
+    width: 100%;
+    background-color: #34495e;
+    padding: 20px 0;
+    text-align: center;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 28px;
+}
+
+/* Buttons Container */
+.buttons-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 50px;
+    align-items: center;
+}
+
+/* Dashboard Buttons */
+.dashboard-btn {
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: #2980b9;
+    color: white;
+    font-size: 18px;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.dashboard-btn:hover {
+    background-color: #3498db;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+    transform: translateY(-3px);
+}
+
+.dashboard-btn:active {
+    background-color: #1c6ea4;
+    transform: translateY(1px);
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .dashboard-btn {
+        font-size: 16px;
+        padding: 12px 24px;
+    }
+}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>La Gestion Des Recrutements</h1>
+    </header>
+    <main>
+        <div class="buttons-container">
+            <a href="{% url 'liste_candidatures' %}" class="dashboard-btn">Liste des Candidatures</a>
+            <a href="{% url 'liste_offres' %}" class="dashboard-btn">Liste des Offres</a>
+            <a href="{% url 'planifier_entretien' 1 %}" class="dashboard-btn">Planifier un Entretien</a>
+        </div>
+    </main>
+</body>
+</html>
