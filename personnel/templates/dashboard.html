@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dashboard</title>
+    <style>
+        /* Style global de la page */
+        body {
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f7f8fa;
+        color: #2c3e50;
+        line-height: 1.6;
+    }
+
+    /* Container principal du Dashboard */
+    .dashboard-container {
+        max-width: 1200px;
+        margin: 30px auto;
+        padding: 30px;
+        background-color: #ffffff;
+        border-radius: 15px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .dashboard-container:hover {
+        transform: scale(1.02);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Header du Dashboard */
+    .dashboard-header {
+        text-align: center;
+        margin-bottom: 50px;
+        padding-bottom: 20px;
+        border-bottom: 2px solid #ecf0f1;
+    }
+
+    .dashboard-header h1 {
+        font-size: 38px;
+        color: #34495e;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+
+    .dashboard-header p {
+        font-size: 18px;
+        color: #7f8c8d;
+    }
+
+    /* Section des cartes */
+    .dashboard-cards {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        justify-content: space-between;
+        margin-bottom: 50px;
+    }
+
+    /* Carte individuelle */
+    .card {
+        background-color: #ffffff;
+        border-radius: 12px;
+        padding: 30px;
+        width: 23%;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        text-align: center;
+    }
+
+    /* Hover effect */
+    .card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .card h3 {
+        font-size: 22px;
+        font-weight: 600;
+        color: #2980b9;
+        margin-bottom: 15px;
+    }
+
+    .card p {
+        font-size: 18px;
+        font-weight: 500;
+        color: #2c3e50;
+    }
+
+    .card ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .card ul li {
+        font-size: 16px;
+        margin: 10px 0;
+        color: #16a085;
+        font-weight: 500;
+    }
+
+    /* Section des graphiques */
+    .dashboard-graph {
+        margin-top: 50px;
+        text-align: center;
+        border-top: 2px solid #ecf0f1;
+        padding-top: 30px;
+    }
+
+    .dashboard-graph h3 {
+        font-size: 26px;
+        font-weight: 600;
+        color: #34495e;
+        margin-bottom: 30px;
+    }
+
+    /* Boutons et éléments interactifs */
+    .card ul li a {
+        color: #2980b9;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s ease;
+    }
+
+    .card ul li a:hover {
+        color: #16a085;
+    }
+
+    /* Effets de transition */
+    .dashboard-cards .card {
+        transition: all 0.4s ease;
+    }
+
+    .dashboard-cards .card:hover {
+        transform: scale(1.05);
+    }
+
+    /* Responsivité */
+    @media (max-width: 1024px) {
+        .dashboard-cards {
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .card {
+            width: 100%;
+        }
+
+        .dashboard-header h1 {
+            font-size: 32px;
+        }
+
+        .dashboard-header p {
+            font-size: 16px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .dashboard-cards {
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .card {
+            width: 100%;
+        }
+
+        .dashboard-header h1 {
+            font-size: 28px;
+        }
+
+        .dashboard-header p {
+            font-size: 14px;
+        }
+    }
+
+    </style>
+</head>
+<body>
+
+<div class="dashboard-container">
+    <div class="dashboard-header">
+        <h1>Dashboard</h1>
+        <p>Bienvenue dans l'interface d'administration</p>
+    </div>
+
+    <div class="dashboard-cards">
+        <div class="card">
+            <h3>Total Employés</h3>
+            <p>{{ total_employes }}</p>
+        </div>
+        <div class="card">
+            <h3>Employés par type de contrat</h3>
+            <ul>
+                {% for type_contrat in employes_par_type_contrat %}
+                <li>{{ type_contrat.type_contrat }}: {{ type_contrat.count }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="card">
+            <h3>Répartition par Sexe</h3>
+            <ul>
+                {% for sexe in repartition_sexe %}
+                <li>{{ sexe.sexe }}: {{ sexe.count }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="card">
+            <h3>Top Performeurs</h3>
+            <ul>
+                {% for employe in top_performeurs %}
+                <li>{{ employe.nom }} {{ employe.prenom }} - Score: {{ employe.score_evaluation }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <div class="dashboard-graph">
+        <h3>Analyse des absences (12 derniers mois)</h3>
+        <div id="absence-chart"></div>  <!-- Vous pouvez utiliser une librairie comme Chart.js pour afficher un graphique -->
+    </div>
+</div>
+
+<!-- Intégration du code JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Code pour le graphique des absences
+    var ctx = document.getElementById('absence-chart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'line', // Type de graphique, peut être 'bar', 'line', etc.
+        data: {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            datasets: [{
+                label: 'Absences (12 derniers mois)',
+                data: [12, 19, 3, 5, 2, 3, 7, 11, 16, 18, 23, 25],
+                borderColor: '#16a085',
+                backgroundColor: 'rgba(22, 160, 133, 0.2)',
+                borderWidth: 2
+            }]
+        }
+    });
+</script>
+
+</body>
+</html>
+
