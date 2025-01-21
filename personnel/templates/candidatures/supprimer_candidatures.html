@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supprimer une Candidature</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .confirmation-box {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            text-align: center;
+        }
+        h1 {
+            font-size: 24px;
+            color: #34495e;
+        }
+        p {
+            margin-top: 10px;
+            color: #7f8c8d;
+        }
+        button {
+            background-color: #e74c3c;
+            color: white;
+            font-weight: bold;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #c0392b;
+        }
+        a {
+            text-decoration: none;
+            color: #2980b9;
+            font-weight: bold;
+            margin-top: 10px;
+            display: inline-block;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<div class="confirmation-box">
+    <h1>Êtes-vous sûr de vouloir supprimer cette candidature ?</h1>
+    <p>Cette action est irréversible.</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Confirmer la suppression</button>
+    </form>
+    <a href="{% url 'liste_candidatures' %}">Retour à la liste des candidatures</a>
+</div>
+</body>
+</html>
