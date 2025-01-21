@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des Congés</title>
+    <link rel="stylesheet" href="{% static 'style/conges.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Liste des Congés</h1>
+        <a href="{% url 'ajouter_conge' %}" class="btn btn-success">Ajouter un Congé</a>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Employé</th>
+                    <th>Type de Congé</th>
+                    <th>Date Début</th>
+                    <th>Date Fin</th>
+                    <th>Jours Utilisés</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for conge in conges %}
+                <tr>
+                    <td>{{ conge.employe.nom }} {{ conge.employe.prenom }}</td>
+                    <td>{{ conge.type_conge.type }}</td>
+                    <td>{{ conge.date_debut }}</td>
+                    <td>{{ conge.date_fin }}</td>
+                    <td>{{ conge.jours_utilises }}</td>
+                    <td>
+                        <a href="{% url 'modifier_conge' conge.id %}" class="btn btn-primary">Modifier</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
