@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des Offres</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        header {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        table {
+            margin: 20px auto;
+            width: 90%;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #2980b9;
+            color: white;
+        }
+        a {
+            text-decoration: none;
+            color: #2980b9;
+            font-weight: bold;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .add-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 20px auto;
+            background-color: #27ae60;
+            color: white;
+            text-transform: uppercase;
+            text-align: center;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+        .add-btn:hover {
+            background-color: #2ecc71;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Liste des Offres d'Emploi</h1>
+</header>
+<main>
+    <table>
+        <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Date de Publication</th>
+                <th>Date d'Expiration</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for offre in offres %}
+            <tr>
+                <td>{{ offre.titre }}</td>
+                <td>{{ offre.description }}</td>
+                <td>{{ offre.date_publication }}</td>
+                <td>{{ offre.date_expiration }}</td>
+                <td>
+                    <a href="{% url 'modifier_offre' offre.id %}">Modifier</a> | 
+                    <a href="{% url 'supprimer_offre' offre.id %}">Supprimer</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'ajouter_offre' %}" class="add-btn">Ajouter une Offre</a>
+</main>
+</body>
+</html>
